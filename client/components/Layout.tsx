@@ -20,11 +20,8 @@ import React from "react";
 export function Logo({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center gap-2 font-bold text-xl tracking-tight", className)}>
-      <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-        <Leaf className="h-5 w-5 fill-current" />
-        <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full bg-background flex items-center justify-center">
-           <Cpu className="h-2.5 w-2.5 text-primary flex flex-col justify-center items-center" />
-        </div>
+      <div className="relative flex h-9 w-9 items-start justify-start rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+        <Leaf className="h-5 w-5 fill-current my-auto" />
       </div>
       <div
         className="flex flex-col justify-center items-center font-['Manrope'] font-bold text-[20px] leading-[28px] bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
