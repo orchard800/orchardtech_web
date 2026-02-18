@@ -24,12 +24,12 @@ export function Logo({ className }: { className?: string }) {
         <Leaf className="h-5 w-5 fill-current my-auto flex flex-col items-center justify-center" />
       </div>
       <div
-        className="flex flex-col justify-center items-center font-['Manrope'] font-bold text-[20px] leading-[28px] bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
+        className="flex flex-row self-center items-center justify-center mr-auto font-['Manrope'] font-bold text-[20px] leading-[28px] bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
         data-loc="client/components/Layout.tsx:29:7"
       >
         <div className="font-['Manrope']">Orchard</div>
         <div
-          className="inline font-bold text-primary font-['Manrope']"
+          className="font-bold text-primary font-['Manrope'] mr-auto ml-1"
           data-loc="client/components/Layout.tsx:30:16"
         >
           Tech
