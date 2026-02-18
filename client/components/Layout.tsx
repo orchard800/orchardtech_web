@@ -21,7 +21,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center gap-2 font-bold text-xl tracking-tight", className)}>
       <div className="relative flex h-9 w-9 items-start justify-start rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-        <Leaf className="h-5 w-5 fill-current my-auto" />
+        <Leaf className="h-5 w-5 fill-current my-auto flex flex-col items-center justify-center" />
       </div>
       <div
         className="flex flex-col justify-center items-center font-['Manrope'] font-bold text-[20px] leading-[28px] bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
