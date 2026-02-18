@@ -15,6 +15,7 @@ import {
   Github
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import React from "react";
 
 export function Logo({ className }: { className?: string }) {
   return (
