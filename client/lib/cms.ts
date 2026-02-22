@@ -1,3 +1,5 @@
+import { GENERATED_PAGES } from "@/content/generated-pages";
+
 const DIRECTUS_URL = import.meta.env.VITE_DIRECTUS_URL?.replace(/\/$/, "") || "";
 const DIRECTUS_TOKEN = import.meta.env.VITE_DIRECTUS_PUBLIC_TOKEN || "";
 
@@ -66,6 +68,18 @@ function normalizeSections(raw: any[] = []): CmsSection[] {
 
 export async function getPageBySlug(slug: string): Promise<CmsPage | null> {
   const clean = slug.replace(/^\//, "") || "home";
+
+  const generated = GENERATED_PAGES.find((p) => p.slug === clean);
+  if (generated) {
+    return {
+      ...generated,
+      sections: normalizeSections(generated.sections),
+    };
+  }
+
+  // Dev/fallback mode only: query Directus at runtime when page wasn't baked at build time.
+  if (!DIRECTUS_URL) return null;
+
   const params = new URLSearchParams({
     filter: JSON.stringify({ slug: { _eq: clean }, status: { _eq: "published" } }),
     limit: "1",
