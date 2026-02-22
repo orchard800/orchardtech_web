@@ -21,9 +21,10 @@ export const GENERATED_PAGES: GeneratedPage[] = [
         "sort": 1,
         "type": "hero",
         "props": {
+          "id": 1,
           "heading": "Building the Digital Roots of Future Agencies",
           "subheading": "Orchard Tech helps agencies scale with consulting, development, and automation.",
-          "primary_cta_label": "Start Your Project",
+          "primary_cta_label": "Start Your Journey",
           "primary_cta_href": "/contact"
         }
       },
@@ -32,26 +33,10 @@ export const GENERATED_PAGES: GeneratedPage[] = [
         "sort": 20,
         "type": "feature_grid",
         "props": {
+          "id": 1,
           "heading": "Comprehensive Solutions",
-          "intro": "Practical technical support for agencies that need reliable delivery and measurable outcomes.",
-          "items": [
-            {
-              "title": "Tech Consulting",
-              "description": "Roadmaps, architecture reviews, and pragmatic implementation guidance."
-            },
-            {
-              "title": "Custom Development",
-              "description": "Web apps, integrations, and internal tools tailored to your workflows."
-            },
-            {
-              "title": "Workflow Automation",
-              "description": "Reduce manual work with AI-assisted automations and clean handoffs."
-            },
-            {
-              "title": "Agency Support",
-              "description": "Trusted technical partner support across retainers and project bursts."
-            }
-          ]
+          "intro": null,
+          "items": "[{\"title\":\"Tech Consulting\",\"description\":\"Roadmaps, architecture reviews, and pragmatic implementation guidance.\"},{\"title\":\"Custom Development\",\"description\":\"Web apps, integrations, and internal tools tailored to your workflows.\"},{\"title\":\"Workflow Automation\",\"description\":\"Reduce manual work with AI-assisted automations and clean handoffs.\"},{\"title\":\"Agency Support\",\"description\":\"Trusted technical partner support across retainers and project bursts.\"}]"
         }
       },
       {
@@ -59,8 +44,9 @@ export const GENERATED_PAGES: GeneratedPage[] = [
         "sort": 30,
         "type": "rich_text",
         "props": {
-          "max_width": "4xl",
-          "content": "<h2>Technical Excellence, Minus the Jargon</h2><p>We focus on outcomes: faster delivery, fewer bottlenecks, and dependable systems that support your team and your clients.</p>"
+          "id": 1,
+          "content": "<h2>Technical Excellence, Minus the Jargon</h2><p>We focus on outcomes: faster delivery, fewer bottlenecks, and dependable systems that support your team and your clients.</p>",
+          "max_width": "4xl"
         }
       },
       {
@@ -68,6 +54,7 @@ export const GENERATED_PAGES: GeneratedPage[] = [
         "sort": 40,
         "type": "cta",
         "props": {
+          "id": 1,
           "heading": "Ready to grow your technical capacity?",
           "body": "Tell us what you are building and where the bottlenecks are. We will help you map the fastest route to production.",
           "button_label": "Contact Orchard Tech",

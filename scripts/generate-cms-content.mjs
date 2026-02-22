@@ -21,6 +21,16 @@ function parseProps(value) {
   return {};
 }
 
+function itemFromTypedSection(section) {
+  const t = section?.type;
+  if (t === 'hero') return section?.hero || {};
+  if (t === 'rich_text') return section?.rich_text || {};
+  if (t === 'cta') return section?.cta || {};
+  if (t === 'feature_grid') return section?.feature_grid || {};
+  if (t === 'image') return section?.image_block || {};
+  return parseProps(section?.props);
+}
+
 async function fetchPublishedPages() {
   if (!DIRECTUS_URL) {
     console.warn('[cms:generate] VITE_DIRECTUS_URL missing; writing empty generated pages.');
@@ -31,7 +41,7 @@ async function fetchPublishedPages() {
     filter: JSON.stringify({ status: { _eq: 'published' } }),
     limit: '-1',
     sort: 'slug',
-    fields: 'id,slug,title,status,seo,sections.id,sections.sort,sections.type,sections.props',
+    fields: 'id,slug,title,status,seo,sections.id,sections.sort,sections.type,sections.hero.*,sections.rich_text.*,sections.cta.*,sections.feature_grid.*,sections.image_block.*,sections.props',
     deep: JSON.stringify({ sections: { _sort: 'sort' } }),
   });
 
@@ -58,7 +68,7 @@ async function fetchPublishedPages() {
         id: section.id,
         sort: section.sort ?? 0,
         type: section.type,
-        props: parseProps(section.props),
+        props: itemFromTypedSection(section),
       }))
       .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)),
   }));
