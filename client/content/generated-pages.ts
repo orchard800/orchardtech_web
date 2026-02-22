@@ -36,7 +36,24 @@ export const GENERATED_PAGES: GeneratedPage[] = [
           "id": 1,
           "heading": "Comprehensive Solutions",
           "intro": null,
-          "items": "[{\"title\":\"Tech Consulting\",\"description\":\"Roadmaps, architecture reviews, and pragmatic implementation guidance.\"},{\"title\":\"Custom Development\",\"description\":\"Web apps, integrations, and internal tools tailored to your workflows.\"},{\"title\":\"Workflow Automation\",\"description\":\"Reduce manual work with AI-assisted automations and clean handoffs.\"},{\"title\":\"Agency Support\",\"description\":\"Trusted technical partner support across retainers and project bursts.\"}]"
+          "items": [
+            {
+              "title": "Tech Consulting",
+              "description": "Roadmaps, architecture reviews, and pragmatic implementation guidance."
+            },
+            {
+              "title": "Custom Development",
+              "description": "Web apps, integrations, and internal tools tailored to your workflows."
+            },
+            {
+              "title": "Workflow Automation",
+              "description": "Reduce manual work with AI-assisted automations and clean handoffs."
+            },
+            {
+              "title": "Agency Support",
+              "description": "Trusted technical partner support across retainers and project bursts."
+            }
+          ]
         }
       },
       {

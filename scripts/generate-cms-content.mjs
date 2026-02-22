@@ -23,12 +23,22 @@ function parseProps(value) {
 
 function itemFromTypedSection(section) {
   const t = section?.type;
-  if (t === 'hero') return section?.hero || {};
-  if (t === 'rich_text') return section?.rich_text || {};
-  if (t === 'cta') return section?.cta || {};
-  if (t === 'feature_grid') return section?.feature_grid || {};
-  if (t === 'image') return section?.image_block || {};
-  return parseProps(section?.props);
+  const item = t === 'hero' ? (section?.hero || {})
+    : t === 'rich_text' ? (section?.rich_text || {})
+    : t === 'cta' ? (section?.cta || {})
+    : t === 'feature_grid' ? (section?.feature_grid || {})
+    : t === 'image' ? (section?.image_block || {})
+    : parseProps(section?.props);
+
+  if (t === 'feature_grid' && typeof item?.items === 'string') {
+    try {
+      item.items = JSON.parse(item.items);
+    } catch {
+      item.items = [];
+    }
+  }
+
+  return item;
 }
 
 async function fetchPublishedPages() {
