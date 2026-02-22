@@ -30,18 +30,35 @@ function endpoint(path: string) {
   return `${DIRECTUS_URL}${path}`;
 }
 
+function safeParseProps(value: any) {
+  if (value == null) return {};
+  if (typeof value === "object") return value;
+  if (typeof value === "string") {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return {};
+    }
+  }
+  return {};
+}
+
 function normalizeSections(raw: any[] = []): CmsSection[] {
   return raw
     .map((entry) => {
-      const collection = entry?.collection || entry?.item?.collection || entry?.type;
-      const item = entry?.item && typeof entry.item === "object" ? entry.item : entry;
+      const parsed = safeParseProps(entry?.props);
+      const type = entry?.type || entry?.collection;
+      const item = entry?.item && typeof entry.item === "object"
+        ? { ...entry.item, ...parsed }
+        : { type, ...parsed };
+
       return {
         id: entry?.id,
-        sort: entry?.sort ?? item?.sort ?? 0,
-        collection,
+        sort: entry?.sort ?? 0,
+        collection: entry?.collection || type,
         item,
-        type: collection,
-        props: item?.props || item,
+        type,
+        props: parsed,
       };
     })
     .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
@@ -52,7 +69,7 @@ export async function getPageBySlug(slug: string): Promise<CmsPage | null> {
   const params = new URLSearchParams({
     filter: JSON.stringify({ slug: { _eq: clean }, status: { _eq: "published" } }),
     limit: "1",
-    fields: "id,slug,title,status,seo,sections.id,sections.sort,sections.collection,sections.item.*,*.*",
+    fields: "id,slug,title,status,seo,sections.id,sections.sort,sections.type,sections.props",
     deep: JSON.stringify({ sections: { _sort: "sort" } }),
   });
 
