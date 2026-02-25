@@ -15,18 +15,19 @@ function normalizeItems(value: unknown): Feature[] {
 
 export default function FeatureGridBlock({ heading, intro, items = [] }: { heading?: string; intro?: string; items?: Feature[] | string }) {
   const list = normalizeItems(items);
+  const wide = list.length >= 4;
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-14 md:py-16 border-t border-border/70">
       <div className="container">
-        {heading && <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">{heading}</h2>}
-        {intro && <p className="text-muted-foreground max-w-2xl mx-auto text-center mb-12">{intro}</p>}
+        {heading && <h2 className="text-2xl md:text-3xl font-semibold mb-3">{heading}</h2>}
+        {intro && <p className="text-muted-foreground max-w-3xl mb-8">{intro}</p>}
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className={`grid gap-4 ${wide ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-2"}`}>
           {list.map((item, i) => (
-            <article key={`${item.title}-${i}`} className="rounded-2xl border bg-background p-6">
-              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
-              {item.description && <p className="text-muted-foreground text-sm">{item.description}</p>}
+            <article key={`${item.title}-${i}`} className="rounded-md border bg-card p-5">
+              <h3 className="font-medium text-base mb-2">{item.title}</h3>
+              {item.description && <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>}
             </article>
           ))}
         </div>

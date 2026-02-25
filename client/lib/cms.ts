@@ -1,4 +1,5 @@
 import { GENERATED_PAGES } from "@/content/generated-pages";
+import { getFallbackPage } from "@/lib/fallback-pages";
 
 const DIRECTUS_URL = import.meta.env.VITE_DIRECTUS_URL?.replace(/\/$/, "") || "";
 const DIRECTUS_TOKEN = import.meta.env.VITE_DIRECTUS_PUBLIC_TOKEN || "";
@@ -86,27 +87,31 @@ export async function getPageBySlug(slug: string): Promise<CmsPage | null> {
     };
   }
 
-  // Dev/fallback mode only: query Directus at runtime when page wasn't baked at build time.
-  if (!DIRECTUS_URL) return null;
+  if (!DIRECTUS_URL) return getFallbackPage(clean);
 
   const params = new URLSearchParams({
     filter: JSON.stringify({ slug: { _eq: clean }, status: { _eq: "published" } }),
     limit: "1",
-    fields: "id,slug,title,status,seo,sections.id,sections.sort,sections.type,sections.hero.*,sections.rich_text.*,sections.cta.*,sections.feature_grid.*,sections.image_block.*,sections.props",
+    fields:
+      "id,slug,title,status,seo,sections.id,sections.sort,sections.type,sections.hero.*,sections.rich_text.*,sections.cta.*,sections.feature_grid.*,sections.image_block.*,sections.props",
     deep: JSON.stringify({ sections: { _sort: "sort" } }),
   });
 
-  const res = await fetch(endpoint(`/items/pages?${params.toString()}`), {
-    headers: headers(),
-  });
+  try {
+    const res = await fetch(endpoint(`/items/pages?${params.toString()}`), {
+      headers: headers(),
+    });
 
-  if (!res.ok) return null;
-  const json = await res.json();
-  const page = json?.data?.[0];
-  if (!page) return null;
+    if (!res.ok) return getFallbackPage(clean);
+    const json = await res.json();
+    const page = json?.data?.[0];
+    if (!page) return getFallbackPage(clean);
 
-  return {
-    ...page,
-    sections: normalizeSections(page.sections),
-  };
+    return {
+      ...page,
+      sections: normalizeSections(page.sections),
+    };
+  } catch {
+    return getFallbackPage(clean);
+  }
 }
