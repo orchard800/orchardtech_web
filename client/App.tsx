@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import CmsPage from "./pages/CmsPage";
+import LogoLab from "./pages/LogoLab";
 
 const App = () => (
   <>
@@ -12,6 +13,7 @@ const App = () => (
       <Layout>
         <Routes>
           <Route path="/" element={<CmsPage forcedSlug="home" />} />
+          <Route path="/logo-lab" element={<LogoLab />} />
           <Route path="/:slug" element={<CmsPage />} />
         </Routes>
       </Layout>
