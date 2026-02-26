@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getPageBySlug, type CmsPage as CmsPageType } from "@/lib/cms";
 import BlockRenderer from "@/components/cms/BlockRenderer";
+import LogoLab from "./LogoLab";
 
 export default function CmsPage({ forcedSlug }: { forcedSlug?: string }) {
   const params = useParams();
   const slug = forcedSlug || params.slug || "home";
+  const location = useLocation();
+  const showLogoLab = slug === "home" && new URLSearchParams(location.search).get("logo") === "lab";
   const [page, setPage] = useState<CmsPageType | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -35,5 +38,10 @@ export default function CmsPage({ forcedSlug }: { forcedSlug?: string }) {
     return <div className="container py-24"><h1 className="text-3xl font-bold">Page not found</h1></div>;
   }
 
-  return <BlockRenderer sections={page.sections || []} />;
+  return (
+    <>
+      <BlockRenderer sections={page.sections || []} />
+      {showLogoLab && <LogoLab />}
+    </>
+  );
 }
