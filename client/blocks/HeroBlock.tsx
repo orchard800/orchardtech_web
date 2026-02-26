@@ -15,7 +15,11 @@ export default function HeroBlock({
         {subheading && <p className="text-lg text-muted-foreground max-w-3xl mb-10">{subheading}</p>}
         <div className="flex flex-wrap items-center gap-3">
           {primary_cta_label && (
-            <Button asChild size="lg" className="rounded-md px-6">
+            <Button
+              asChild
+              size="lg"
+              className="rounded-md px-6 bg-gradient-to-r from-primary to-accent text-white shadow-[0_10px_30px_-12px_hsl(var(--accent)/0.7)] hover:opacity-95"
+            >
               <a href={primary_cta_href || "#"}>{primary_cta_label}</a>
             </Button>
           )}

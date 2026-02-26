@@ -22,7 +22,7 @@ const FALLBACK_NAV: SiteNavItem[] = [
 function Logo() {
   return (
     <Link to="/" className="font-semibold tracking-tight text-lg">
-      Orchard <span className="text-primary">Tech</span>
+      <span className="text-accent">Orchard</span> <span className="text-primary">Tech</span>
     </Link>
   );
 }

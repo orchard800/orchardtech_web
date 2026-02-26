@@ -8,7 +8,10 @@ export default function CtaBlock({ heading, body, button_label, button_href }: a
           <h2 className="text-2xl md:text-3xl font-semibold mb-3">{heading}</h2>
           {body && <p className="text-muted-foreground mb-6 max-w-2xl">{body}</p>}
           {button_label && (
-            <Button asChild className="rounded-md px-6">
+            <Button
+              asChild
+              className="rounded-md px-6 bg-gradient-to-r from-primary to-accent text-white shadow-[0_10px_30px_-12px_hsl(var(--accent)/0.7)] hover:opacity-95"
+            >
               <a href={button_href || "#"}>{button_label}</a>
             </Button>
           )}
