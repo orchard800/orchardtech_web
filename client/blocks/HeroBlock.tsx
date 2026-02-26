@@ -10,7 +10,7 @@ export default function HeroBlock({
 }: any) {
   return (
     <section className="pt-28 pb-14 md:pt-36 md:pb-20">
-      <div className="container max-w-5xl">
+      <div className="container max-w-5xl rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-transparent p-8 md:p-12">
         <h1 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6 leading-tight">{heading || "Orchard Tech"}</h1>
         {subheading && <p className="text-lg text-muted-foreground max-w-3xl mb-10">{subheading}</p>}
         <div className="flex flex-wrap items-center gap-3">

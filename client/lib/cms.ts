@@ -22,6 +22,16 @@ export type CmsPage = {
   seo?: Record<string, any>;
 };
 
+export type SiteNavItem = {
+  label: string;
+  to: string;
+  sort?: number;
+};
+
+export type SiteSettings = {
+  navigation: SiteNavItem[];
+};
+
 function headers() {
   const base: Record<string, string> = { "Content-Type": "application/json" };
   if (DIRECTUS_TOKEN) base.Authorization = `Bearer ${DIRECTUS_TOKEN}`;
@@ -74,6 +84,50 @@ function normalizeSections(raw: any[] = []): CmsSection[] {
       };
     })
     .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
+}
+
+function normalizeNavItems(raw: unknown): SiteNavItem[] {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .map((item, idx): SiteNavItem | null => {
+      const label = String(item?.label ?? item?.title ?? "").trim();
+      const toRaw = String(item?.to ?? item?.href ?? item?.url ?? "").trim();
+      const to = toRaw.startsWith("/") || toRaw.startsWith("http") ? toRaw : `/${toRaw}`;
+      const sort = Number.isFinite(item?.sort) ? Number(item.sort) : idx;
+
+      if (!label || !toRaw) return null;
+      return { label, to, sort };
+    })
+    .filter(Boolean)
+    .sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) as SiteNavItem[];
+}
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  if (!DIRECTUS_URL) return null;
+
+  try {
+    const params = new URLSearchParams({
+      fields: "navigation",
+      limit: "1",
+    });
+
+    const res = await fetch(endpoint(`/items/site_settings?${params.toString()}`), {
+      headers: headers(),
+    });
+
+    if (!res.ok) return null;
+
+    const json = await res.json();
+    const item = json?.data?.[0] || json?.data;
+    const navigation = normalizeNavItems(item?.navigation);
+
+    if (!navigation.length) return null;
+
+    return { navigation };
+  } catch {
+    return null;
+  }
 }
 
 export async function getPageBySlug(slug: string): Promise<CmsPage | null> {

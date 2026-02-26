@@ -1,5 +1,5 @@
 /** @import must precede all other statements */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Manrope:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -12,35 +12,37 @@
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 220 15% 10%;
-    --foreground: 210 20% 96%;
+    --background: 222 37% 10%;
+    --background-2: 226 30% 8%;
+    --foreground: 210 22% 96%;
 
-    --card: 220 15% 12%;
+    --card: 222 27% 14%;
     --card-foreground: 210 20% 96%;
 
-    --popover: 220 15% 12%;
+    --popover: 222 27% 14%;
     --popover-foreground: 210 20% 96%;
 
-    --primary: 214 84% 62%;
+    --primary: 171 69% 46%;
     --primary-foreground: 220 40% 9%;
 
-    --secondary: 220 13% 18%;
+    --secondary: 221 23% 20%;
     --secondary-foreground: 210 20% 96%;
 
-    --muted: 220 13% 18%;
-    --muted-foreground: 215 15% 70%;
+    --muted: 221 22% 19%;
+    --muted-foreground: 213 15% 73%;
 
-    --accent: 220 13% 18%;
+    --accent: 268 65% 62%;
+    --accent-glow: 205 87% 64%;
     --accent-foreground: 210 20% 96%;
 
     --destructive: 0 62% 44%;
     --destructive-foreground: 210 20% 96%;
 
-    --border: 220 13% 22%;
-    --input: 220 13% 22%;
-    --ring: 214 84% 62%;
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 171 69% 46%;
 
-    --radius: 0.75rem;
+    --radius: 0.9rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -53,33 +55,35 @@
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
+    --background: 222 37% 10%;
+    --background-2: 226 30% 8%;
     --foreground: 210 20% 98%;
 
-    --card: 224 71.4% 4.1%;
+    --card: 222 27% 14%;
     --card-foreground: 210 20% 98%;
 
-    --popover: 224 71.4% 4.1%;
+    --popover: 222 27% 14%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 142.1 70.6% 45.3%;
+    --primary: 171 69% 46%;
     --primary-foreground: 144.4 96.6% 11.4%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 221 23% 20%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 221 22% 19%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 268 65% 62%;
+    --accent-glow: 205 87% 64%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 142.1 70.6% 45.3%;
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 171 69% 46%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -107,6 +111,10 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background-image: radial-gradient(circle at 15% -10%, hsl(var(--primary) / 0.16), transparent 45%),
+      radial-gradient(circle at 92% 0%, hsl(var(--accent-glow) / 0.18), transparent 38%);
+    background-attachment: fixed;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {

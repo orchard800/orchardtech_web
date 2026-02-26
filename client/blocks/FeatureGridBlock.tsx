@@ -18,14 +18,17 @@ export default function FeatureGridBlock({ heading, intro, items = [] }: { headi
   const wide = list.length >= 4;
 
   return (
-    <section className="py-14 md:py-16 border-t border-border/70">
+    <section className="py-14 md:py-16 border-t border-border/50">
       <div className="container">
         {heading && <h2 className="text-2xl md:text-3xl font-semibold mb-3">{heading}</h2>}
         {intro && <p className="text-muted-foreground max-w-3xl mb-8">{intro}</p>}
 
         <div className={`grid gap-4 ${wide ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-2"}`}>
           {list.map((item, i) => (
-            <article key={`${item.title}-${i}`} className="rounded-md border bg-card p-5">
+            <article
+              key={`${item.title}-${i}`}
+              className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.03] to-transparent p-5"
+            >
               <h3 className="font-medium text-base mb-2">{item.title}</h3>
               {item.description && <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>}
             </article>

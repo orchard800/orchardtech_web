@@ -65,6 +65,24 @@ The React registry maps:
 
 So if those collections exist and are included in the M2A `sections` field on `pages`, content will render automatically.
 
+## Optional global collection for nav
+
+## `site_settings`
+- `id`
+- `navigation` (json array)
+
+Example `navigation` value:
+```json
+[
+  { "label": "Capabilities", "to": "/capabilities", "sort": 1 },
+  { "label": "How We Partner", "to": "/how-we-partner", "sort": 2 },
+  { "label": "About", "to": "/about", "sort": 3 },
+  { "label": "Contact", "to": "/contact", "sort": 4 }
+]
+```
+
+If present, the frontend uses this to build the header menu (desktop + mobile off-canvas). If absent, it falls back to built-in defaults.
+
 ## Required env vars
 
 - `VITE_DIRECTUS_URL=https://admin.orchardtech.net`
