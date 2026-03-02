@@ -11,7 +11,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { getSiteSettings, type SiteNavItem } from "@/lib/cms";
-import { PixelOtLogo } from "@/components/PixelOtLogo";
 
 const FALLBACK_NAV: SiteNavItem[] = [
   { label: "Capabilities", to: "/capabilities", sort: 1 },
@@ -22,8 +21,8 @@ const FALLBACK_NAV: SiteNavItem[] = [
 
 function Logo() {
   return (
-    <Link to="/" className="font-semibold tracking-tight text-lg flex items-center gap-2">
-      <PixelOtLogo variant="v2" className="h-5 w-5" />
+    <Link to="/" className="font-semibold tracking-tight text-lg flex items-center gap-3">
+      <img src="/orchardtech-logo.svg" alt="Orchard Tech logo" className="h-7 w-auto shrink-0" />
       <span><span className="text-accent">Orchard</span> <span className="text-primary">Tech</span></span>
     </Link>
   );
